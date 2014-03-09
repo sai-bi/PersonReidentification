@@ -1,36 +1,36 @@
 clear all;
 close all;
+clc;
 
 total_img_num = 1264;
 folder_name_a = './../viper/cam_a/';
 folder_name_b = './../viper/cam_b/';
 
-img_features = cell(total_img_num);
 
-files_in_a = dir(folder_name_a);
-files_in_b = dir(folder_name_b);
+files_in_a = dir(strcat(folder_name_a,'*.bmp'));
+files_in_b = dir(strcat(folder_name_b,'*.bmp'));
 
 
-img_hsvyuv_a = cell(total_img_num/2);
-img_hsvyuv_b = cell(total_img_num/2);
+img_hsvyuv_a = cell(total_img_num/2,1);
+img_hsvyuv_b = cell(total_img_num/2,1);
 
 process_bar = waitbar(0,'Read images in...');
 
-for i = 1:size(files_in_a,1)-2		
-	waitbar(i/(size(files_in_a,1)-2), process_bar);
-	imgpath = strcat(folder_name_a,files_in_a(i+2).name);
+for i = 1:size(files_in_a,1)	
+	waitbar(i/(size(files_in_a,1)), process_bar);
+	imgpath = strcat(folder_name_a,files_in_a(i).name);
 	imgrgb = imread(imgpath);
 	[img_hsvyuv_a{i}.HSV, img_hsvyuv_a{i}.YUV] = imageConvert(imgrgb);
 
-	imgpath = strcat(folder_name_b,files_in_b(i+2).name);
+	imgpath = strcat(folder_name_b,files_in_b(i).name);
 	imgrgb = imread(imgpath);
 	[img_hsvyuv_b{i}.HSV, img_hsvyuv_b{i}.YUV] = imageConvert(imgrgb);
 end
 
 close(process_bar);
 
-hsv_feature_a = cell(total_img_num/2);
-hsv_feature_b = cell(total_img_num/2);
+hsv_feature_a = cell(total_img_num/2,1);
+hsv_feature_b = cell(total_img_num/2,1);
 
 
 parameters.patchheight = 4;
