@@ -1,3 +1,4 @@
+
 # Compiled Object files
 *.slo
 *.lo
@@ -49,6 +50,6 @@ data
 dev
 resources
 
-viper
-caviar
+data
+
 
