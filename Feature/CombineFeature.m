@@ -16,7 +16,7 @@ for i = 1:total_img_num/2
 		hsv = hsv_feature_a{i}{j}.HSV;
 		yuv = hsv_feature_a{i}{j}.YUV;
 		temp_feature{j} = [hsv;yuv];
-		temp_feature{j+patch_num} = labfeatuer_a{i}{j};
+		temp_feature{j+patch_num} = (labfeatuer_a{i}{j})';
 	end		
 	viper_features{i} = temp_feature;
 end
@@ -27,7 +27,7 @@ for i = 1:total_img_num/2
 		hsv = hsv_feature_b{i}{j}.HSV;
 		yuv = hsv_feature_b{i}{j}.YUV;
 		temp_feature{j} = [hsv;yuv];
-		temp_feature{j+patch_num} = labfeatuer_b{i}{j};
+		temp_feature{j+patch_num} = (labfeatuer_b{i}{j})';
 	end		
 	viper_features{i+total_img_num/2} = temp_feature;
 end
