@@ -5,7 +5,7 @@ function corr = cal_correlation(got_feature,currfeature,num)
 		temp2 = zeros(size(temp1,2),1);
 		for j = 1:size(temp1,2)
 			result = corrcoef(temp1(:,j), currfeature(:,j));
-			temp2(j) = result(1,2);
+			temp2(j) = abs(result(1,2));
 		end
 		corr_vec(i) = mean(temp2);
 	end	

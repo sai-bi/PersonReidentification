@@ -6,7 +6,7 @@ load('../Feature/data/viper_features.mat');
 parameters.total_patch_num = 704;
 parameters.total_img_num = 1264;
 parameters.selected_patch_num = 60;
-parameters.sample_num = 30;
+parameters.sample_num = 31;
 parameters.pca_out_dim = 600;
 
 permutation = randperm(parameters.total_img_num/2);
@@ -18,7 +18,7 @@ got_feature = cell(1,parameters.sample_num);
 got_feature{1} = get_selected_patch_feature(parameters,viper_features);
 got_feature{1} = mypca(got_feature{1},parameters.pca_out_dim);
 waitbar(1/parameters.sample_num,process_bar);
-for i = 2:parameters.sample_num
+for i = 2:parameters.sample_num-1
 	pre_selected_num = 10;
 	pre_selected_feature = cell(pre_selected_num,1);
 	correlation = zeros(pre_selected_num,1);
@@ -31,6 +31,18 @@ for i = 2:parameters.sample_num
 	got_feature{i} = pre_selected_feature{min_index};
 	waitbar(i/parameters.sample_num,process_bar);
 end
+
+got_feature(parameters.sample_num) = [];
+for i = 1:parameters.total_img_num
+	currfeature = viper_features{i};
+	selected_feature = [];
+	for j = 1:parameters.total_patch_num
+		selected_feature = [selected_feature;currfeature{j}];
+	end	
+	got_feature(parameters.sample_num) = [got_feature{parameters.sample_num} selected_feature];
+end
+
+
 
 for i = 1:parameters.sample_num
 	temp1 = got_feature{i};

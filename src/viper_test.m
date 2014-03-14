@@ -4,13 +4,13 @@ clc;
 parameters.total_patch_num = 704;
 parameters.total_img_num = 1264;
 parameters.selected_patch_num = 60;
-parameters.sample_num = 30;
+parameters.sample_num = 31;
 parameters.pca_out_dim = 600;
 parameters.outdim = 80;
 parameters.testnum = 316;
 load('./data/metrics.mat');
 distance = zeros(1,parameters.testnum * parameters.testnum);
-for j = 1:parameters.sample_num
+for j = 1:20
 	load(strcat('./data/selected_viper_feature',num2str(j),'.mat'));
 	test_part1_pca = metrics{j} * test_part1;
 	test_part2_pca = metrics{j} * test_part2;
@@ -25,11 +25,12 @@ distance = reshape(distance,parameters.testnum,[]);
 [~,index] = sort(distance,1);
 ratio = zeros(1,parameters.testnum);
 for i = 1:parameters.testnum
-	temp =  index(i,i);
-	ratio = ratio + [zeros(1,temp-1), ones(1,parameters.testnum - temp + 1)];		
+	temp = index(:,i);
+	index1 = find(temp == i);
+	ratio = ratio + [zeros(1,index1-1), ones(1,parameters.testnum - index1 + 1)];		
 end
 x = 1:parameters.testnum;
-ratio = ratio / parameters.testnum;
+ratio = ratio / parameters.testnum * 100;
 figure;
 plot(x,ratio);
 
