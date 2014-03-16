@@ -1,6 +1,18 @@
-clear all;
-close all;
-clc;
+function ratio = viper_test(num)
+% clear all;
+% close all;
+% clc;
+if(num == 20)
+	start_index = 1;
+	end_index = 20;
+end
+if(num == 31)
+	start_index = 31;
+	end_index = 31;
+end
+
+
+
 parameters.total_patch_num = 704;
 parameters.total_img_num = 1264;
 parameters.selected_patch_num = 60;
@@ -10,7 +22,7 @@ parameters.outdim = 80;
 parameters.testnum = 316;
 load('./data/metrics.mat');
 distance = zeros(1,parameters.testnum * parameters.testnum);
-for j = 1:20
+for j = start_index:end_index
 	load(strcat('./data/selected_viper_feature',num2str(j),'.mat'));
 	test_part1_pca = metrics{j} * test_part1;
 	test_part2_pca = metrics{j} * test_part2;
@@ -21,6 +33,7 @@ for j = 1:20
 	temp1 = sum(temp1.^2,1);	
 	distance = distance + temp1;
 end
+
 distance = reshape(distance,parameters.testnum,[]);
 [~,index] = sort(distance,1);
 ratio = zeros(1,parameters.testnum);
@@ -31,8 +44,10 @@ for i = 1:parameters.testnum
 end
 x = 1:parameters.testnum;
 ratio = ratio / parameters.testnum * 100;
-figure;
-plot(x,ratio);
+% figure;
+% plot(x,ratio);
+
+end
 
 
 

@@ -48,13 +48,13 @@ comperror=comperror || compile('findNimtree.cpp',force);
 addpath(pwd);
 cd ..
 
-cd gbrt
-comperror=comperror || compile('buildlayer_sqrimpurity.cpp',force);
-comperror=comperror || compile('buildlayer_sqrimpurity_multif.cpp',force);
-comperror=comperror || compile('buildlayer_sqrimpurity_openmp.cpp',force);
-comperror=comperror || compile('buildlayer_sqrimpurity_openmp_multi.cpp',force);
-comperror=comperror || compile('buildlayer_sqrimpurity_openmp_multi_limit.cpp',force);
-cd ..
+% cd gbrt
+% comperror=comperror || compile('buildlayer_sqrimpurity.cpp',force);
+% comperror=comperror || compile('buildlayer_sqrimpurity_multif.cpp',force);
+% comperror=comperror || compile('buildlayer_sqrimpurity_openmp.cpp',force);
+% comperror=comperror || compile('buildlayer_sqrimpurity_openmp_multi.cpp',force);
+% comperror=comperror || compile('buildlayer_sqrimpurity_openmp_multi_limit.cpp',force);
+% cd ..
 
 if 	comperror,
 	fprintf('\n\nLooks like you had some compilation errors.\n');

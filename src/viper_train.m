@@ -1,6 +1,7 @@
-clear all;
-close all;
-clc;
+function [] = viper_train() 
+% clear all;
+% close all;
+% clc;
 parameters.total_patch_num = 704;
 parameters.total_img_num = 1264;
 parameters.selected_patch_num = 60;
@@ -22,7 +23,7 @@ for i = 1:parameters.sample_num
 	viper_features{i}.train_part2 = train_part2;
 end
 
-matlabpool open 4;
+%matlabpool open 4;
 metrics = cell(parameters.sample_num,1);
 parfor i = 1:parameters.sample_num
 	label = [1:316 1:316];
@@ -30,5 +31,7 @@ parfor i = 1:parameters.sample_num
 end
 
 save('./data/metrics.mat','metrics');
-matlabpool close;
+%matlabpool close;
+
+end
 
