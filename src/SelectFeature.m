@@ -8,7 +8,7 @@ load('../Feature/data/viper_features.mat');
 parameters.total_patch_num = 704;
 parameters.part_patch_num = 352;
 parameters.total_img_num = 1264;
-parameters.selected_patch_num = 60;
+parameters.selected_patch_num = 80;
 parameters.sample_num = 31;
 parameters.pca_out_dim = 600;
 
